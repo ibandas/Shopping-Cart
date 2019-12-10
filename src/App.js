@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button, Card, Container, Col, Row, Jumbotron, Navbar} from 'react-bootstrap';
+import {Button, Card, Container, Col, Row, Jumbotron, Navbar, OverlayTrigger} from 'react-bootstrap';
 import 'rbx/index.css';
 import {Message } from 'rbx';
 import firebase from 'firebase/app';
@@ -8,6 +8,7 @@ import 'firebase/database';
 import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import Product from './components/product';
+import Cart from './components/cart';
 
 const firebaseConfig = {
   apiKey: "AIzaSyA4EetIjbTOWm49xEM-Eyd4rkFqbEwvcss",
@@ -40,12 +41,15 @@ const Banner = ({user}) => (
   </React.Fragment>
 );
 
-const Welcome = ({ user }) => (
+const Welcome = ({ user, cart}) => (
   <Navbar bg="dark" variant="dark">
     <Navbar.Brand>Welcome, {user.displayName}</Navbar.Brand>
     <Button primary onClick={() => firebase.auth().signOut()}>
         Log out
     </Button>
+    <OverlayTrigger trigger="click" placement="right" overlay={Cart}>
+        <Button variant="success">Cart</Button>
+    </OverlayTrigger>
   </Navbar>
 );
 
@@ -77,7 +81,7 @@ const App = () => {
 
   return (
     <Jumbotron>
-      <Banner user={user}/>
+      <Banner user={user} cart={Cart}/>
       <Container>
         <Row>
           {products.map(product =>
