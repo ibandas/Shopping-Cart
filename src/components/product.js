@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button, Container, Col, Row, Card, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {Button, ButtonToolbar, ButtonGroup, Container, Col, Row, Card, ListGroup, ListGroupItem} from 'react-bootstrap';
 
 const Product = ({product}) => {
     return (
@@ -17,7 +17,20 @@ const Product = ({product}) => {
                          {product.style}
                     </Card.Text>
                 </Card.Body>
-                <Card.Footer><Button variant="primary">Add to Cart</Button></Card.Footer>
+                <Card.Footer>
+                    <Container>
+                        <Row>
+                            <ButtonToolbar>
+                                <ButtonGroup aria-label="First group">
+                                    <Button variant="primary">S</Button>
+                                    <Button variant="primary">M</Button>
+                                    <Button variant="primary">L</Button>
+                                    <Button variant="primary">XL</Button>
+                                </ButtonGroup>
+                            </ButtonToolbar>
+                        </Row>
+                    </Container>
+                </Card.Footer>
             </Card>
         </Col>      
     )
