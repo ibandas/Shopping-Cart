@@ -91,16 +91,16 @@ const AddItem = ({size, product}) => {
   let foundItem = false;
   let i;
   for (i = 0; i < cart.length; i++) {
-    if (cart[i].product === product && cart[i].size != 0) {
+    if (contents[i].product === product && contents[i].size != 0) {
       foundItem = true;
       break;
     }
   }
   if (foundItem) {
-    cart[i].quantity += 1;
+    contents[i].quantity += 1;
   }
   else {
-    cart.push({
+    contents.push({
       product: product,
       size: size,
       quantity: 1
