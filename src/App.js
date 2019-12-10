@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button, Card, Container, Col, Row, Jumbotron} from 'react-bootstrap';
+import {Button, Card, Container, Col, Row, Jumbotron, Navbar} from 'react-bootstrap';
+import 'rbx/index.css';
+import {Message } from 'rbx';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
@@ -32,16 +34,20 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database().ref();
 
 
-// const Welcome = ({ user }) => (
-//   <Message color="info">
-//     <Message>
-//       Welcome, Irinel Bandas
-//       <Button primary onClick={() => firebase.auth().signOut()}>
-//         Log out
-//       </Button>
-//     </Message>
-//   </Message>
-// );
+const Banner = ({user}) => (
+  <React.Fragment>
+    { user ? <Welcome user={ user } /> : <SignIn /> }
+  </React.Fragment>
+);
+
+const Welcome = ({ user }) => (
+  <Navbar bg="dark" variant="dark">
+    <Navbar.Brand>Welcome, {user.displayName}</Navbar.Brand>
+    <Button primary onClick={() => firebase.auth().signOut()}>
+        Log out
+    </Button>
+  </Navbar>
+);
 
 const SignIn = () => (
   <StyledFirebaseAuth
@@ -55,14 +61,6 @@ const App = () => {
   const products = Object.values(data);
   const [user, setUser] = useState(null);
 
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     const response = await fetch('./data/products.json');
-  //     const json = await response.json();
-  //     setData(json);
-  //   };
-  //   fetchProducts();
-  // }, []);
   useEffect(() => {
     const handleData = snap => {
       if (snap.val()) {
@@ -79,10 +77,7 @@ const App = () => {
 
   return (
     <Jumbotron>
-        <h1>Welcome, Irinel Bandas</h1>
-        <p>
-          <Button variant="primary">Log Out</Button>
-        </p>
+      <Banner user={user}/>
       <Container>
         <Row>
           {products.map(product =>
