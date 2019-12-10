@@ -9,7 +9,7 @@ const Cart = ({user, cart}) => {
             <Popover.Title as="h3">Popover right</Popover.Title>
             <Popover.Content>
             <Container>
-                
+                {cart}
             </Container>
             </Popover.Content>
         </Popover>

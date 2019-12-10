@@ -47,7 +47,7 @@ const Welcome = ({ user, cart}) => (
     <Button primary onClick={() => firebase.auth().signOut()}>
         Log out
     </Button>
-    <OverlayTrigger trigger="click" placement="right" overlay={Cart}>
+    <OverlayTrigger trigger="click" placement="right" overlay={Cart(user, cart)}>
         <Button variant="success">Cart</Button>
     </OverlayTrigger>
   </Navbar>
@@ -86,6 +86,8 @@ const App = () => {
 
 
 const AddItem = ({size, product}) => {
+  let contents = cart;
+  console.log(contents);
   let foundItem = false;
   let i;
   for (i = 0; i < cart.length; i++) {
@@ -104,7 +106,7 @@ const AddItem = ({size, product}) => {
       quantity: 1
     })
   }
-  setCart(cart);
+  setCart(contents);
 }
 
   return (
