@@ -60,8 +60,13 @@ const SignIn = () => (
   />
 );
 
+const RemoveItem = ({id, size, products, currentCart}) => {
+
+}
+
 const App = () => {
   const [data, setData] = useState({});
+  const [cart, setCart] = useState([{}]);
   const products = Object.values(data);
   const [user, setUser] = useState(null);
 
@@ -79,13 +84,36 @@ const App = () => {
     firebase.auth().onAuthStateChanged(setUser);
   }, []);
 
+
+const AddItem = ({size, product}) => {
+  let foundItem = false;
+  let i;
+  for (i = 0; i < cart.length; i++) {
+    if (cart[i].product === product && cart[i].size != 0) {
+      foundItem = true;
+      break;
+    }
+  }
+  if (foundItem) {
+    cart[i].quantity += 1;
+  }
+  else {
+    cart.push({
+      product: product,
+      size: size,
+      quantity: 1
+    })
+  }
+  setCart(cart);
+}
+
   return (
     <Jumbotron>
-      <Banner user={user} cart={Cart}/>
+      <Banner user={user} cart={cart}/>
       <Container>
         <Row>
           {products.map(product =>
-            <Product product={product}/>
+            <Product product={product} AddItem={AddItem}/>
           )}
         </Row>
       </Container>

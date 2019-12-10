@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, ButtonToolbar, ButtonGroup, Container, Col, Row, Card, ListGroup, ListGroupItem} from 'react-bootstrap';
 
-const Product = ({product}) => {
+const Product = ({product, AddItem}) => {
     return (
         <Col sm={4}>
             <Card bg="dark" text="white" style={{ width: '18rem', height: '45rem'}}>
@@ -22,10 +22,10 @@ const Product = ({product}) => {
                         <Row>
                             <ButtonToolbar>
                                 <ButtonGroup aria-label="First group">
-                                    <Button variant="primary">S</Button>
-                                    <Button variant="primary">M</Button>
-                                    <Button variant="primary">L</Button>
-                                    <Button variant="primary">XL</Button>
+                                    <Button variant="primary" onClick={() => AddItem("S", product)}>S</Button>
+                                    <Button variant="primary" onClick={() => AddItem("M", product)}>M</Button>
+                                    <Button variant="primary" onClick={() => AddItem("L", product)}>L</Button>
+                                    <Button variant="primary" onClick={() => AddItem("XL", product)}>XL</Button>
                                 </ButtonGroup>
                             </ButtonToolbar>
                         </Row>
